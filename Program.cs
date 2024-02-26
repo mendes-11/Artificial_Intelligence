@@ -19,13 +19,22 @@ var date = DateTime.Now;
 List<double[]> bounds = new() 
 {
     new double[] {-10.0, 10.0},
-    new double[] {-10.0, 10.0}
+    new double[] {-10.0, 10.0},
+    new double[] {-10.0, 10.0},
+    new double[] {-10.0, 10.0},
+    new double[] {-10.0, 10.0},
+    new double[] {-10.0, 10.0},
+    new double[] {-10.0, 10.0},
+    new double[] {-10.0, 10.0},
+    new double[] {-10.0, 10.0},
+    new double[] {-10.0, 10.0},
+
 };
 
 
 date = DateTime.Now;
 var diffEvolution = new DiffEvolution(Rosenbrock, bounds, 1000);
-var res = diffEvolution.Optimize(10000);
+var res = diffEvolution.Optimize(100);
 Console.WriteLine($"Solution: {res[0]} and {res[1]} | Time: {(DateTime.Now - date).TotalMicroseconds}");
 
 
