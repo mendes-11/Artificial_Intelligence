@@ -15,6 +15,10 @@ double Rosenbrock(double[]x)
 
 var date = DateTime.Now;
 
+double Restriction(double[] x)
+{
+    return -1.0;
+}
 
 List<double[]> bounds = new() 
 {
@@ -33,8 +37,8 @@ List<double[]> bounds = new()
 
 
 date = DateTime.Now;
-var diffEvolution = new DiffEvolution(Rosenbrock, bounds, 1000);
-var res = diffEvolution.Optimize(100);
+var diffEvolution = new DiffEvolution(Rosenbrock, bounds, 200, Restriction);
+var res = diffEvolution.Optimize(10000);
 Console.WriteLine($"Solution: {res[0]} and {res[1]} | Time: {(DateTime.Now - date).TotalMicroseconds}");
 
 
