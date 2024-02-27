@@ -1,7 +1,7 @@
 ﻿using AIContinuos;
 
 
-double Rosenbrock(double[]x)
+double Rosenbrock(double[]x) //altitude negativa
 {
     double value = 0.0;
     var n = x.Length - 1;
@@ -15,24 +15,23 @@ double Rosenbrock(double[]x)
 
 var date = DateTime.Now;
 
-double Restriction(double[] x)
+double Restriction(double[] x)//quantidade de combustivel
 {
-    return -1.0;
+    return 1000;
 }
 
 List<double[]> bounds = new() 
 {
-    new double[] {-10.0, 10.0},
-    new double[] {-10.0, 10.0},
-    new double[] {-10.0, 10.0},
-    new double[] {-10.0, 10.0},
-    new double[] {-10.0, 10.0},
-    new double[] {-10.0, 10.0},
-    new double[] {-10.0, 10.0},
-    new double[] {-10.0, 10.0},
-    new double[] {-10.0, 10.0},
-    new double[] {-10.0, 10.0},
-
+    new double[] {0.0, 120},
+    new double[] {0.0, 110},
+    new double[] {0.0, 90},
+    new double[] {0.0, 80},
+    new double[] {0.0, 70},
+    new double[] {0.0, 60},
+    new double[] {0.0, 50},
+    new double[] {0.0, 40},
+    new double[] {0.0, 30},
+    new double[] {0.0, 20},
 };
 
 
