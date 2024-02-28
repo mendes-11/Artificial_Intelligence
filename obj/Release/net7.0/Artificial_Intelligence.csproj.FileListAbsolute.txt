@@ -1,0 +1,14 @@
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\bin\Release\net7.0\Artificial_Intelligence.exe
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\bin\Release\net7.0\Artificial_Intelligence.deps.json
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\bin\Release\net7.0\Artificial_Intelligence.runtimeconfig.json
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\bin\Release\net7.0\Artificial_Intelligence.dll
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\bin\Release\net7.0\Artificial_Intelligence.pdb
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\obj\Release\net7.0\Artificial_Intelligence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\obj\Release\net7.0\Artificial_Intelligence.AssemblyInfoInputs.cache
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\obj\Release\net7.0\Artificial_Intelligence.AssemblyInfo.cs
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\obj\Release\net7.0\Artificial_Intelligence.csproj.CoreCompileInputs.cache
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\obj\Release\net7.0\Artificial_Intelligence.dll
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\obj\Release\net7.0\refint\Artificial_Intelligence.dll
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\obj\Release\net7.0\Artificial_Intelligence.pdb
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\obj\Release\net7.0\Artificial_Intelligence.genruntimeconfig.cache
+C:\Users\disrct\Desktop\Aula IA\Artificial_Intelligence\obj\Release\net7.0\ref\Artificial_Intelligence.dll

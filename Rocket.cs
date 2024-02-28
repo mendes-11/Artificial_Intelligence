@@ -36,13 +36,11 @@ public class Rocket
         this.TimeData = (double[])timeData.Clone();
         this.MassFlowData = (double[])massFlowData.Clone();
 
-        var time = 0.0;
         this.Mass = DryMass + Integrate.Romberg(TimeData, massFlowData);
     }
 
     public double CalculateMassFlow(double t)
-        => Interp1D.Linear(TimeData, MassFlowData, t);
-
+        => t > TimeData[^1] ? 0.0 : Interp1D.Linear(TimeData, MassFlowData, t);
 
     public double MomentunEq(double t)
     {
@@ -78,7 +76,8 @@ public class Rocket
     }
 
     public double CalculateThrust(double t)
-          => CalculateMassFlow(t) * Ve;
+        => t > TimeData[^1] ? 0.0 : CalculateMassFlow(t) * Ve;
+    
 
 
     public double CalculateDrag(double vel, double h )
