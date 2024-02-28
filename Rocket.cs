@@ -1,82 +1,125 @@
-using System;
+using AIContinuos.Nuenv;
+using AIContinuous.Nuenv;
 using AIContinuous.Rocket;
+
+namespace Foguete;
 
 public class Rocket
 {
-    public double MassaRocket { get; set; }
-    public double MassaGasolina { get; set; }
-    public double Diametro { get; set; }
-    public double CArrasto { get; set; }
-    public int Velocidade { get; set; }
-    protected List<double[]> Bounds { get; }
+    public double DryMass { get; set; }
+    public double CrossSectionArea { get; set; }
+    public double Ve { get; set; }
+    public double Cd0 { get; set; }
+    public double Time { get; set; }
+    public double Height { get; set; }
+    public double Velocity { get; set; }
+    public double Mass { get; set; }
+    public double[] TimeData { get; set; }
+    public double[] MassFlowData { get; set; }
+
+
 
 
     public Rocket(
-        double massaRocket,
-        double massaGasolina,
-        double diametro = 0.6,
-        double cArrasto = 0.8,
-        int velocidade = 1916,
-        List<double[]> bounds
-
-        
+        double dryMass,
+        double crossSectionArea,
+        double ve,
+        double cd0,
+        double[] timeData,
+        double[] massFlowData        
     ) 
     {
-        this.MassaRocket = massaRocket;
-        this.MassaGasolina = massaGasolina;
-        this. Diametro = diametro;
-        this.CArrasto = cArrasto;
-        this.Velocidade = velocidade;
-        this.Bounds = bounds;
+        this.DryMass = dryMass;
+        this.CrossSectionArea = crossSectionArea;
+        this.Ve = ve;
+        this.Cd0 = cd0;
+        this.TimeData = (double[])timeData.Clone();
+        this.MassFlowData = (double[])massFlowData.Clone();
+
+        var time = 0.0;
+        this.Mass = DryMass + Integrate.Romberg(TimeData, massFlowData);
     }
 
-    public double Acceleration()
+    public double CalculateMassFlow(double t)
+        => Interp1D.Linear(TimeData, MassFlowData, t);
+
+
+    public double MomentunEq(double t)
     {
-        double m = 4250;
-        double altitude = 0;
-        double velocidade = 0;
-        for (int i = 0; i < Bounds.Count; i++)
-        {
-            double empuxo = Empuxo(Bounds[i][1]);
-            double arrasto = Arrasto(empuxo, velocidade);
-            double peso = Peso(m,altitude);
+        var thust = CalculateThrust(t);
+        var drag = CalculateDrag(Velocity, Height);
+        var weight = CalculateWeight(Height, Mass);
 
-            double Acelerator = (empuxo + arrasto + peso) / m;
-            double vel = (Acelerator);
-            double altura = AltitudeRocket(vel);
-
-        }
-
-
-
+        return (thust + drag + weight) / Mass;
     }
 
-    public double Empuxo(double b, double vExaustao = 1916.0)
-          => b * vExaustao;
-
-
-    public double Arrasto(double t, double velocidade)
+    public void UpdateVelocity(double t, double dt)
     {
-        double Cd = Drag.Coefficient(0, t, 0.8);
-        double p =  Atmosphere.Density(0);
-        double A = Math.PI * 0.9;
-
-        double D = -0.5 * Cd * p * A * (velocidade * velocidade) * 1;
-
-        return D;
+        var accel = MomentunEq(t);
+        Velocity += accel * dt;
+    }
+    public void UpdateHeight(double dt)
+    {
+        Height += Velocity * dt;
     }
 
-    public double Peso(double m, double a)
-        => -m * Gravity.GetGravity(a);
+    public void FlyAlittleBit(double dt)
+    {
+        UpdateVelocity(Time, dt);
+        UpdateHeight(dt);
+        UpdateMass(Time, dt);
+
+        Time += dt;
+    }
+
+    public void UpdateMass(double t, double dt)
+    {
+        Mass -= 0.5 * dt * (CalculateMassFlow(t) + CalculateMassFlow(t + dt));
+    }
+
+    public double CalculateThrust(double t)
+          => CalculateMassFlow(t) * Ve;
 
 
-    public static double SpeedRocket(double A)
-        => A * 0;
+    public double CalculateDrag(double vel, double h )
+    {
+        var temperature = Atmosphere.Temperature(h);
+        var cd = Drag.Coefficient(vel, temperature, Cd0);
+        var rho =  Atmosphere.Density(h);
+
+        return -0.5 * cd * rho * CrossSectionArea * (vel * vel) * Math.Sign(vel);
+    }
+
+    public static double CalculateWeight(double h, double m)
+        => -m * Gravity.GetGravity(h);
 
 
-    public static double AltitudeRocket(double V)
-        =>  V * 0;
-   
+    public double Launch(double time, double dt = 1e-1)
+    {
+        for (double i = 0.0; i < time; i += dt)
+            FlyAlittleBit(dt);
+
+        return Height;
+    }
+
+    public double LaunchUntilMax(double dt = 1e-1)
+    {
+
+        do FlyAlittleBit(dt);
+        while( Velocity > 0.0);
+        
+        return Height;
+    }
+
+     public double LaunchUntilGround(double dt = 1e-1)
+    {
+
+        do FlyAlittleBit(dt);
+        while( Height > 0.0);
+        
+        return Height;
+    }
+ 
 }
 
 
