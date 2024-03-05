@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AulasAI", "AulasAI.csproj", "{2BDF836E-7BF4-4B86-A184-1C9E1402100B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BDF836E-7BF4-4B86-A184-1C9E1402100B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BDF836E-7BF4-4B86-A184-1C9E1402100B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BDF836E-7BF4-4B86-A184-1C9E1402100B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BDF836E-7BF4-4B86-A184-1C9E1402100B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E144056D-921A-4CDA-B09C-6EDCD6CA3EA1}
+	EndGlobalSection
+EndGlobal
